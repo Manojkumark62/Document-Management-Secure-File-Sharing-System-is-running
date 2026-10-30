@@ -1,0 +1,14 @@
+Run `alembic upgrade head` against a new database before starting the application.
+The application no longer creates database tables automatically.
+
+The initial migration creates users, roles, documents, and their relationships.
+The latest migration adds persistent request audit events.
+
+For an existing database created by the former `Base.metadata.create_all()` startup,
+first verify that the users, roles, user_roles, documents, and document_shares tables
+match revisions through `c13a6b0e8f42`. Then run:
+
+    alembic stamp c13a6b0e8f42
+    alembic upgrade head
+
+Configure `DATABASE_URL` in the environment (or `.env`) before running Alembic.
